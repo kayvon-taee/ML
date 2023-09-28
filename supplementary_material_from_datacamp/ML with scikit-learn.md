@@ -82,8 +82,37 @@ print(knn.score(X_test, y_test))
 print("Predictions: {}".format(y_pred)) 
 ```
 
+## Assessing model accuracy
+Like all data modelling, we are interested to assess the accuracy of our predictions. Fortunately, the scikit-learn library provides an easy way of doing so for KNN modelling, using the `knn.score()` method. The arguments passed in are the feature/explanatory test variables and the target/response test variables respectively. The algorithms used by default are from the model selection module, such as GridSearchCV and cross_validate.
+
+It is important to note that the selection of the k for the k-neighbours greatly influences our model accuracy. For example, a very low k value can lead to underfitting, where as a very high k value can lead to overfitting. In either case, the accuracy can vary, so it's important to find that middle ground. You can find the best k value by creating a dictionary, looping through possible k-values. Following that, you can use a `max()` function to find the k-value with the highest accuracy:
+
+```{python}
+# Create neighbors
+neighbors = np.arange(1, 13)
+train_accuracies = {}
+test_accuracies = {}
+
+for neighbor in neighbors:
+  
+	# Set up a KNN Classifier
+	knn = KNeighborsClassifier(n_neighbors=neighbor)
+  
+	# Fit the model
+	knn.fit(X_train, y_train)
+  
+	# Compute accuracy
+	train_accuracies[neighbor] = knn.score(X_train, y_train)
+	test_accuracies[neighbor] = knn.score(X_test, y_test)
+print(neighbors, '\n', train_accuracies, '\n', test_accuracies)
+
+# Find the k value with the highest accuracy
+print(max(test_accuracies.items(), key=lambda k: k[1]))
+```
+
+It should be noted this is not the standard method for selecting the best k value as other methods such as GridSearchCV() will select the best k value for us. More details on that later!
+
 # **TODO**
-- Discuss what knn.score is
 - Discuss different knn scores and accuracies
 - Introduce Linear Regression module from scikit.learn
 - Discuss Cross Validation
