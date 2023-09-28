@@ -107,3 +107,32 @@ If A is a real symmetric matrix, then there is $X \in M_{p x p}$ whose columns a
 eigenvectors of A (i.e., scaled to have length 1), which is an orthogonal matrix; i.e.
 
 $$XX' = X'X = I_p$$
+
+# Gradient descent
+
+  We are often interested in choosing the optimal parameters for a given model to get accurate predictions, however, we need a way of measuring the accuracy. A common way is to use the mean square error, MSE:
+
+$$MSE(\hat{y}) = \frac{1}{n} \sum_{i=i}^{n}(y_i-\hat{y_i})^2$$
+
+where $y_i$ is the actual value of the response variable for the ith sample, and $\hat{y_i}$ is the value predicted by the model. An important point: The MSE is sensitive to outliers, so it should only be used if there are little to no outliers in your model
+
+If you have many outliers, we can consider an alternative measurement known as the mean absolute error, (MAE):
+$$MAE(\hat{y}) = \frac{1}{n} \sum_{i=i}^{n}|y_i-\hat{y_i}|$$
+
+In either case, the key idea is we measure the differences between our predictions observed data in our test set. A function used to measure such differences are known as *loss functions* or *cost functions*.
+
+For a general reference, [see this wikipedia article](https://en.wikipedia.org/wiki/Loss_function).
+
+Regardless of our chosen of measurement for accuracy, we need to select model parameters that minimise the loss function. While this is straight forward for cases like simple linear regression, it becomes complicated when we have many parameters or use "less routine" statistics. To that end, we consider numerical methods like **gradient descent**.
+
+At its core, gradient descent is an algorithm that calculates the parameters in a model that minimises the change in the loss function with respect to its parameters. In other words, the gradient! More formally, we can write the following formula:
+$$\nabla MSE = \left(\frac{\delta MSE}{\delta \lambda_1}, \dotsm , \frac{\delta MSE}{\delta \lambda_r}\right)$$
+
+where $\lambda_1, \dotsm, \lambda_r$ are the parameters in the model. If we adjust the parameters by a small amount in the opposite direction, such as $-(\epsilon \times \nabla MSE)$ for some small $\epsilon > 0$ to the parameters, we would expect the loss function to decrease. In some cases, the $\epsilon$ is known as a the **learning rate**.
+
+We continuously adjust the $\epsilon$ until we find a local minimum. Since we have a lot fo data, this can be a slow process. To speed it up, we can look for other optimisation methods such as **[stochastic gradient descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent)**, which looks at a random sample of the dataset to compute the loss function. Of course, there is a trade off between accuracy and efficency, so you should consider your context carefully before proceeding.
+
+Gradient descent isn't without issues. In any multivariate setting, it's common for functions to have many "minimum" points known as a local minima. The point where gradient descent converges does not guarantee it is the lowest minimum possible (known as the global minimum). 
+
+![Gradient descent in action](image.png)
+To avoid this, we can randomly select different starting points and run the algorithm, hoping to find the global minimum. This is a problem in particular for neural networks as they have many parameters to deal with!
