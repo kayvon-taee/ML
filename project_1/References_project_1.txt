@@ -1,0 +1,21 @@
+﻿@article{RN2,
+   author = {Coli, Marina and Rangel, Angelo and Souza, Elizangela and Oliveira, Margareth and Chiaradia, Ana},
+   title = {Chloride concentration in red wines: Influence of terroir and grape type},
+   journal = {Food Science and Technology (Campinas)},
+   volume = {35},
+   pages = {95-99},
+   DOI = {10.1590/1678-457X.6493},
+   year = {2015},
+   type = {Journal Article}
+}
+
+@article{RN1,
+   author = {Cortez, P. and Cerdeira, Antonio Luíz and Almeida, Fernando and Matos, Telmo and Reis, José},
+   title = {Modeling wine preferences by data mining from physicochemical properties},
+   journal = {Decis. Support Syst.},
+   volume = {47},
+   pages = {547-553},
+   year = {2009},
+   type = {Journal Article}
+}
+

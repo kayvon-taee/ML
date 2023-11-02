@@ -1,0 +1,100 @@
+---
+title: "Assignment 1"
+output:
+  pdf_document:
+    keep_tex: yes
+    citation_package: biblatex
+    latex_engine: xelatex
+bibliography: ReferencesProject1.bib
+csl: harvard.csl
+---
+
+# Introduction
+
+Portugal has been long celebrated for its wine production, from port wine to _vinho verde_ from the Minho province. To address growing demand, the wine industry is interested in optimising its wine production. As wine is a food product, most of its prized features are taste and aroma, which are subjective measurements.
+Previous studies have tried to categorise wine by quality through combining human taste testers, physicochemical analysis and statistical methods in attempts to introduce objectivity^[@RN1]. In this project, we are most concerned with which **particular variables** are essential for considering wine quality. By knowing which variables should be prioritised, this can motivate further study on optimising the wine according to essential attributes and enforce more efficient production.
+
+Therefore, this report aims to address the following questions:
+
+1. Which variables play a significant role in ascertaining the quality of red and white wine?
+2. Are there any trends between wine attributes and its percieved quality?
+3. Are there any differences between mean acidity values of wine and its quality?
+
+The dataset employed in this study comprises data sourced from laboratory tests, providing an intricate look into the chemical composition of wines from Portugal's Minho region.
+It encompasses a comprehensive range of variables, including fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH levels, sulphates, alcohol content,
+and a subjective quality rating on a scale of 0 to 10, where 10 represents the highest quality. Additionally, a color indicator, as a dummy variable, distinguishes between red and white wines.
+
+## Which variables are essential for wine quality?
+
+
+
+## If space allows - further EDA
+
+Perform visualisations - any trends between variables? Something interesting if datasets are considered separately?
+
+@TODO
+Vinegar said to have bitter test. White wine appreciated for its sweetness, but what about red wine? Perform x-axis volatile acidity, y-axis quality, with red/blue as red/white wines.
+
+OR
+
+@TODO
+Consider sweetness from sugar and quality.
+
+@TODO
+Sulphates formed from fermentation. More fermentation => more age => more quality?
+
+## PCA analysis
+
+1. Plots of principle components
+2. Comment on the main chemical differences between red and white wines
+3. Including quality variable what features are likely to be present in wines of good quality? Is it different for red and white?
+
+### How to approach PCA
+
+First, check the distributions of the data. You can do this using cumulative variance or the plots from datacamp. Are there any werid points?
+
+If needed, transform the data. You can use make_pipeline() to help you.
+
+Display the variance and note the elbow of the plot. Which components are necessary? What can be discarded?
+
+Print out the PCAs as a table with an appropiate caption. Comment on a few PCAs for contributions, relating back to some of the math, such as the eigenvalues. Include a formula.
+
+Your research question show address the following: "What features are most influential on a particular type of wine of high quality?" You should also consider the main chemical differences between red and white wines (Use the PCA components for this)
+
+# One page - Hotelling T square test
+
+1. Perform a Hotelling’s $T^2$ -test to test the hypothesis that the red and while wines have the same
+acidity means (the variables fixed acidity, volatile acidity and pH)
+2. Select some variables and compute $\mu_W$ of selected variables for white wine
+3. Perform 1-sample $T^2$ test to check whether corresponding means for red wine dataset are equal to $\mu_W$
+
+## Approaching the Hotelling T square test
+
+1. Give a sentence or two for motivation of test
+2. Give a little math background
+2. State the hypothesis clearly
+3. Perform test
+4. State the result with a confidence interval if applicable
+
+
+Your report should have:
+1. A question stated clearly
+2. Explaining the statistical test used to address question
+3. Give solution
+4. Potentially visualisation
+
+Other notes:
+1. You must give references
+2. Try to keep it to 4 pages
+
+## Things to keep in mind
+
+-  Citric acid and residual sugar levels are more important in
+white wine, where the equilibrium between the freshness and sweet taste is
+more appreciated
+- volatile acidity has a negative impact on wine taste, as it introduces bitterness (cite this)
+- Sulphastes might link to wine aroma
+- Additional research into impact of what affects wine tastes could prove useful.
+
+
+
