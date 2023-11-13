@@ -63,16 +63,13 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Assignment 1},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{Assignment 1}
 \author{}
 \date{\vspace{-2.5em}}
 
 \begin{document}
-\maketitle
 
 \section{Introduction}\label{introduction}
 
@@ -107,100 +104,51 @@ Therefore, this report aims to address the following questions:
   of wine?
 \end{enumerate}
 
-The dataset employed in this study comprises data sourced from
-laboratory tests, providing an intricate look into the chemical
-composition of wines from Portugal's Minho region. It encompasses a
-comprehensive range of variables, including fixed acidity, volatile
-acidity, citric acid, residual sugar, chlorides, free sulfur dioxide,
-total sulfur dioxide, density, pH levels, sulphates, alcohol content,
-and a subjective quality rating on a scale of 0 to 10, where 10
-represents the highest quality. Additionally, a color indicator, as a
-dummy variable, distinguishes between red and white wines. - Data
-checked for outliers - Total size is 6497 - To account for outliers but
-also not to lose too much data, 5\% was chosen (325) entries as max
-threshold to lose - Applied a IQR check. Normally, data less than Q1 -
-IQR\emph{1.5 or more than Q3 + 1.5 }IQR is common procedure as it does
-not assume normality - However, this lead to a large amount fo data
-being lost, so stricter threshold of 2.5 was chosen instead.
+The dataset utilized in this study is drawn from laboratory tests,
+offering a detailed examination of the chemical composition of wines
+from Portugal's Minho region. It includes an extensive array of
+variables such as fixed acidity, volatile acidity, citric acid, residual
+sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH
+levels, sulphates, alcohol content, and a subjective quality rating on a
+scale of 0 to 10, where 10 signifies the highest quality. Additionally,
+a color indicator, acting as a dummy variable, distinguishes between red
+and white wines.
 
-\subsection{EDA - How does citric acid play a role in quality of
-wines?}\label{eda---how-does-citric-acid-play-a-role-in-quality-of-wines}
-
-\begin{itemize}
-\tightlist
-\item
-  Citric acid plays a vital role in wine production
-\item
-  It helps add freshness to the wine, allowing more lively and enjoyable
-  tasting experience, but too much makes it harsh, difficult to
-  drink\footnote{\textcite{RN3}}
-\item
-  Therefore, we are interested in any trends between citric acid
-  concentration and perceived wine quality
-\item
-  Question: Specific to wines of the minho region, what ranges of
-  concentrations is related to wine quality?
-  \includegraphics{whole_data_by_colour_citric_acid_vs_quality.png}
-\item
-  Across dataset:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    High citric acid for low quality (but not certain due to low numbers
-    in category 3 and large error bar)
-  \item
-    Steady increase from quality 4 to 8, but plateaus around 0.33
-    g/dm\(^3\)
-  \item
-    Wines that are ``high quality'' tend to have citric acid
-    concentrations between 0.30 g/dm\(^3\) and 0.35 g/dm\(^3\)
-  \end{itemize}
-\item
-  Between wine groups:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    In general, citric acid concentration over higher quality white wine
-    seems to be fairly consistent, around 0.30 g/dm\(^3\) and 0.35
-    g/dm\(^3\)
-  \item
-    Red wine much more drastic. Even after accounting for large error
-    bars from smaller datapoints for red wine, there is a clear increase
-    between higher quality wines have more citric acid
-  \end{itemize}
-\item
-  Conclusion: It seems that higher quality red wines have more citric
-  acid in them, but it is unclear whether red wine quality of 9 or
-  higher will have more citric acid due to the large error bars. What is
-  apparent is higher quality wines in general tend to have citric acid
-  concentrations between 0.30 to 0.35 g/dm\(^3\). This disparity could
-  be explained by how white wines tend to have more residual sugar than
-  red wines, where adding some freshness is more necessary to balance
-  out the additional sweetness.\footnote{\textcite{RN1}}
-\end{itemize}
+The data underwent outlier checking, with a total size of 6497 entries.
+To balance outlier removal without sacrificing too much data, a 5\%
+threshold (325 entries) was set as the maximum limit for removal. An
+Interquartile Range (IQR) check was applied, a common procedure
+involving data less than Q1 - 1.5IQR or more than Q3 + 1.5IQR. However,
+due to a significant loss of data, a stricter threshold of 2.5 was
+chosen instead.
 
 \subsection{PCA - Chemical differences between red and white
 wines}\label{pca---chemical-differences-between-red-and-white-wines}
 
-\includegraphics{Scree_plot.png} Looking at the scree plot, the elbow
-appears around n = 3 components, so we will use this when proceeding
-with our PCA model. When considering the key chemical differences
-between red and white wines, we need to identify which features produce
-large loadings for our model. These features will help maximumise the
-langrange multiplier, producing the largest variance which is essential
-in differentiating the chemical differences between red and white wines.
-!(biplots\_combined){[}biplots\_combined.png{]} From the principal
-component plots, the key insights from the loadings we can observe are:
-- PC1: Chlorides - Moderate and positive, Volatile acidity - Large and
-positive, Colour - large and positive, Sulphates - moderate and
-positive, pH - moderate and positive, total sulfur dioxide - moderate
-and negative - PC2: Density - Large and positive, Alcohol - large and
-negative, Free sulfur dioxide - moderate and positive, Residual sugar -
-large and positive - PC3: Fixed acidity - large and positive, Citric
-acid - large and positive, colour - close to zero, pH - large and
-negative
+\includegraphics[width=0.5\textwidth,height=\textheight]{Scree_plot.png}
+Looking at the scree plot, the elbow appears around n = 3 components, so
+we will use this when proceeding with our PCA model. When considering
+the key chemical differences between red and white wines, we need to
+identify which features produce large loadings for our model. These
+features will help maximise the langrange multiplier, producing the
+largest variance which is essential in differentiating the chemical
+differences between red and white wines.
+
+\begin{figure}
+\centering
+\includegraphics{biplots_combined.png}
+\caption{biplots\_combined}
+\end{figure}
+
+From the principal component plots, the key insights from the loadings
+we can observe are: - PC1: Chlorides - Moderate and positive, Volatile
+acidity - Large and positive, Colour - large and positive, Sulphates -
+moderate and positive, pH - moderate and positive, total sulfur dioxide
+- moderate and negative - PC2: Density - Large and positive, Alcohol -
+large and negative, Free sulfur dioxide - moderate and positive,
+Residual sugar - large and positive - PC3: Fixed acidity - large and
+positive, Citric acid - large and positive, colour - close to zero, pH -
+large and negative
 
 Insights:
 
@@ -251,9 +199,8 @@ Insights:
   more fermentation. Furthermore, adding sugar or salt to a liquid makes
   it denser. As the alcohol value is large and negative, this means
   wines with less alcohol will have higher PC2 scores. Therefore, this
-  component is associated with the age of the wine. While this component
-  is not used for chemical differences between red and white wines, this
-  will be useful later when considering the quality of the wines.
+  component could be associated with the age of the wine, but further
+  study would be required to verify this.
 \item
   Colour does not affect the PC3 score as it is close to zero.
   Furthermore, the group does not appear to be associated with a
@@ -277,87 +224,135 @@ citric acid concentrations.
 \subsection{PCA - Attributes present in wines of high
 quality}\label{pca---attributes-present-in-wines-of-high-quality}
 
-To help with visu
+As the quality variable contains many categories, it makes it difficult
+to visualise. Thus, the data was grouped into three categories, such
+that \(x_{low_quality} \in [3, 4, 5]\), \(x_{medium_quality} \in [6]\)
+and \(x_{high_quality} \in [7, 8, 9]\), then further divided by wine
+colour. The PCA model in question does not use this dummy feature in its
+fit, only the colour and quality instead.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Plots of principle components
-\item
-  Comment on the main chemical differences between red and white wines
-\item
-  Including quality variable what features are likely to be present in
-  wines of good quality? Is it different for red and white?
-\end{enumerate}
+\begin{figure}
+\centering
+\includegraphics{wine_quality_pc2_vs_pc1_with_quality_new.png}
+\caption{biplots\_with\_quality}
+\end{figure}
 
-Your research question show address the following: ``What features are
-most influential on a particular type of wine of high quality?'' You
-should also consider the main chemical differences between red and white
-wines (Use the PCA components for this)
+\subsubsection{Analysis - alcohol}\label{analysis---alcohol}
 
-\section{One page - Hotelling T square
-test}\label{one-page---hotelling-t-square-test}
+When considering the left plot, we can see for higher quality wines
+overall have negative PC2 scores but high quality red wine has a
+positive PC1 score and high quality white wine has a negative PC1 score.
+As the alcohol loading is close to zero for PC1 but large and negative
+for PC2, this suggests that higher alcohol concentrations are more
+likely to be present for wines of higher quality. Furthermore, as most
+of datapoints for wine types are divided by PC1=0 line (whites on left,
+reds on right), we can say this property \textbf{is not unique to red or
+white wine, rather it applies to both of them}. This is further
+supported by looking at the right plot, where most of the high quality
+wines lie in the top left quadrant of the plot and the quality/alcohol
+arrows point in the same direction.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Perform a Hotelling's \(T^2\) -test to test the hypothesis that the
-  red and while wines have the same acidity means (the variables fixed
-  acidity, volatile acidity and pH)
-\item
-  Select some variables and compute \(\mu_W\) of selected variables for
-  white wine
-\item
-  Perform 1-sample \(T^2\) test to check whether corresponding means for
-  red wine dataset are equal to \(\mu_W\)
-\end{enumerate}
+\subsubsection{Analysis - volatile
+acidity}\label{analysis---volatile-acidity}
 
-\subsection{Approaching the Hotelling T square
-test}\label{approaching-the-hotelling-t-square-test}
+Observing both plots we can see that greater volatile acidity is more
+associated with lower quality wines as the arrow is in the same quadrant
+as 3-5 red and 5 red points. In particular, it appears to be specific to
+red wines as the volatile acidity is more associated with red wine as
+seen in our previous analysis, therefore, \textbf{lower volatile acidity
+is likely to be present in higher quality red wines}.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Give a sentence or two for motivation of test
-\item
-  Give a little math background
-\item
-  State the hypothesis clearly
-\item
-  Perform test
-\item
-  State the result with a confidence interval if applicable
-\end{enumerate}
+\subsubsection{Analysis - fixed acidity}\label{analysis---fixed-acidity}
 
-Your report should have: 1. A question stated clearly 2. Explaining the
-statistical test used to address question 3. Give solution 4.
-Potentially visualisation
+Total sulfur dioxide has small positive PC1, PC2 scores but a large and
+positive PC3 score. As more quality wines tend to lie on the bottom
+quadrants (negative PC2 scores), we can deduce that higher quality wines
+will tend to have lower fixed acidity than lower quality wines. This is
+further supported by the right plot, where the fixed acidity loading is
+in the right quadrants, which tends to be where most of the lower
+quality wines are. Fixed acidity while more associated with red wine
+from the plots, some lower quality white wine loadings are present in
+the same quadrant (though not as much) suggesting \textbf{lower fixed
+acidity is likely to be present in higher quality red wines and white
+wines (to a lesser degree)}.
 
-Other notes: 1. You must give references 2. Try to keep it to 4 pages
+\subsection{Conclusion}\label{conclusion}
 
-\subsection{Things to keep in mind}\label{things-to-keep-in-mind}
+In summary, higher quality wines tend to have higher alcohol levels and
+lower volatile/fixed acidities. When factoring in by wine type and their
+chemical differences, it seems volatile acidity plays a key role in
+determining not only wine type but its quality for red wines as well.
+Therefore, further research should be concentrated on optimising fixed
+acidity levels to produce high quality wines.
 
-\begin{itemize}
-\tightlist
-\item
-  Citric acid and residual sugar levels are more important in white
-  wine, where the equilibrium between the freshness and sweet taste is
-  more appreciated
-\item
-  volatile acidity has a negative impact on wine taste, as it introduces
-  bitterness (cite this)
-\item
-  Sulphastes might link to wine aroma
-\item
-  Additional research into impact of what affects wine tastes could
-  prove useful.
-\end{itemize}
+\section{Hotelling T square test}\label{hotelling-t-square-test}
 
-Sulphates formed from fermentation. More fermentation =\textgreater{}
-more age =\textgreater{} more quality?
+So far, we have explored what particular features are present for wines
+of good quality, as well as main chemical differences between red and
+white wines. We highlighted that volatile and fixed acidity are
+different for red and white wines, but we should verify this through a
+statistical test. As our data is multivariate, we cannot perform a
+standard two sample student t-test, but we can instead perform a \emph{A
+hotelling \(T^2\) test}. For a 2 group case (red and white wine), we can
+perform a MANOVA fit and obtain the Hotelling \(T^2\) statistic and the
+F-value. Confidence intervals were calculated using a function I wrote
+myself based on statistical theory. The hotelling T statistic is 1.6352
+and the F-value is 3292.1193. See code for details.
+
+\textbf{H0}: The mean volatile acidity, fixed acidity and pH are equal
+for both red and white wines
+
+There is very strong evidence (p\textless0.001) to reject the null
+hypothesis that the mean volatile acidity, fixed acidity and pH are
+equal for both red and white wines. It seems at least one of the acidity
+means for red wine is different to white wine with averages of volatile
+acidity 0.234088 95\% simultaneous CI (-28.35, 27.85) g(acetic
+acid)/dm\(^3\), fixed acidity 1.095072 95\% simultaneous CI (-256.65,
+253.73) g(tartaric acid)/dm\(^3\), pH 0.142331 95\% simultaneous CI
+(-34.34, 34.09). As a follow up analysis, we can produce boxplots to see
+which particular acid metric is the most different.
+
+\begin{figure}
+\centering
+\includegraphics{box_plots_for_hotelling_two_sample.png}
+\caption{boxplot\_2\_sample}
+\end{figure}
+
+From the boxplots, it seems most of the red wine volatile acidity tends
+to have higher mean values than white wine, which could explain why the
+test result was statistically significant.
+
+\subsection{Hotelling T test - 1
+sample}\label{hotelling-t-test---1-sample}
+
+Sulphates and sulfur dioxide have not been explored much in this report
+compared to acidity, but they still play an important role to wine
+quality as they affect wine aroma. The sample means of white wine for
+free sulfur dioxide, total sulfur dioxide and sulphates were calculated
+to be 34.92 mg/dm\(^3\), 137.80 mg/dm\(^3\) and 0.49 g(potassium
+sulphate)/dm\(^3\) respectively. Statsmodels comes with a 1 sample
+hotelling t test if you use test\_mvmean
+\texttt{from\ statsmodels.stats.multivariate\ import\ test\_mvmean}
+\href{https://www.statsmodels.org/dev/generated/statsmodels.stats.multivariate.test_mvmean.html}{as
+shown here in their docs}. The F statistic is 3682.53 (2dp) and the
+hotelling value is 11064.99 (2dp)
+
+\textbf{H0}: The mean free sulfur dioxide, total sulfur dioxide and
+sulphates for white mean are equal to the sample means for red wine
+
+There is very strong evidence (p\textless0.001) to reject the null
+hypothesis that the mean free sulfur dioxide, total sulfur dioxide and
+sulphates are equal for both red and white wines. It seems at least one
+of the sulfate means for red wine is different to white wine with
+averages of free sulfur dioxide -18.61 95\% simultaneous CI (-1011.28,
+1043.90) g/dm\(^3\), total sulfur dioxide -90.95 95\% simultaneous CI
+(-3210.83, 3304.53) g/dm\(^3\), sulphates 0.14 95\% simultaneous CI
+(-11.16, 12.43) g(potassium sulphate)/dm\(^3\). As a follow up analysis,
+we can produce boxplots to see which particular sulphate metric is the
+most different (Omitted due to space, but code available to generate
+them). From the boxplots, it seems most of the red wine total sulfur
+dioxide tends to have higher mean values than white wine, which could
+explain why the test result was statistically significant.
 
 \printbibliography
 

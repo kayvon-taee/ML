@@ -95,7 +95,20 @@ Overall conclusion: Aggregating all this information together, we can observe th
 - Cross validation? Maybe evaluate performance with conclusion
 - Consider EDA to illustrate correlation (Can be done through summary statistics) and other interesting relationships
 
-
+## EDA - How does citric acid play a role in quality of wines?
+- Citric acid plays a vital role in wine production
+- It helps add freshness to the wine, allowing more lively and enjoyable tasting experience, but too much makes it harsh, difficult to drink^[@RN3]
+- Therefore, we are interested in any trends between citric acid concentration and perceived wine quality
+- Question: Specific to wines of the minho region, what ranges of concentrations is related to wine quality?
+![wine EDA](whole_data_by_colour_citric_acid_vs_quality.png)
+- Across dataset:
+  - High citric acid for low quality (but not certain due to low numbers in category 3 and large error bar)
+  - Steady increase from quality 4 to 8, but plateaus around 0.33 g/dm$^3$
+  - Wines that are "high quality" tend to have citric acid concentrations between 0.30 g/dm$^3$ and 0.35 g/dm$^3$
+- Between wine groups:
+  - In general, citric acid concentration over higher quality white wine seems to be fairly consistent, around 0.30 g/dm$^3$ and 0.35 g/dm$^3$
+  - Red wine much more drastic. Even after accounting for large error bars from smaller datapoints for red wine, there is a clear increase between higher quality wines have more citric acid
+- Conclusion: It seems that higher quality red wines have more citric acid in them, but it is unclear whether red wine quality of 9 or higher will have more citric acid due to the large error bars. What is apparent is higher quality wines in general tend to have citric acid concentrations between 0.30 to 0.35 g/dm$^3$. This disparity could be explained by how white wines tend to have more residual sugar than red wines, where adding some freshness is more necessary to balance out the additional sweetness.^[@RN1]
 
 
 
