@@ -19,6 +19,17 @@
    type = {Journal Article}
 }
 
+@article{RN4,
+   author = {Mucalo, Ana and Maletic, Edi and Zdunić, Goran},
+   title = {Extended Harvest Date Alter Flavonoid Composition and Chromatic Characteristics of Plavac Mali (Vitis vinifera L.) Grape Berries},
+   journal = {Foods},
+   volume = {9},
+   pages = {1155},
+   DOI = {10.3390/foods9091155},
+   year = {2020},
+   type = {Journal Article}
+}
+
 @article{RN3,
    author = {Scutarașu, Elena Cristina and Teliban, Iulian Valentin and Zamfir, Cătălin Ioan and Luchian, Camelia Elena and Colibaba, Lucia Cintia and Niculaua, Marius and Cotea, Valeriu V.},
    title = {Effect of Different Winemaking Conditions on Organic Acids Compounds of White Wines},
