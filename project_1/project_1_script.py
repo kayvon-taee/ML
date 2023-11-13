@@ -429,15 +429,20 @@ fig.savefig("box_plots_for_hotelling_one_sample.png", dpi=300, bbox_inches='tigh
 # Aimed to investigate different levels of citric acid between and within groups
 # Citric acid interesting because it adds freshness - is freshness associated with quality?
 ##################################################################################
+
 fig, axes = plt.subplots(1, 2, figsize=(12, 6))
 
 # Subplot without hue
 sns.barplot(x='quality', y='citric acid', data=outliers_removed_data, ax=axes[0], capsize=0.1)
 axes[0].set_title('Effect of citric acid on wine quality - Whole dataset')
-
+axes[0].set_xlabel("Quality")
+axes[0].set_ylabel("Citric Acid (g/dm$^3$)")
 # Subplot with hue
 sns.barplot(x='quality', y='citric acid', data=outliers_removed_data, hue='colour', ax=axes[1], capsize=0.2)
 axes[1].set_title('Effect of citric acid on wine quality by wine colour')
+axes[1].set_xlabel("Quality")
+axes[1].set_ylabel("Citric Acid (g/dm$^3$)")
+
 # Customizing legend labels
 legend = axes[1].legend()
 legend.get_texts()[0].set_text("White wine")
@@ -445,6 +450,7 @@ legend.get_texts()[1].set_text("Red wine")
 
 plt.tight_layout()
 plt.show()
+
 # Save the figure
 fig.savefig("whole_data_by_colour_citric_acid_vs_quality.png", dpi=300, bbox_inches='tight')
 

@@ -19,3 +19,16 @@
    type = {Journal Article}
 }
 
+@article{RN3,
+   author = {Scutarașu, Elena Cristina and Teliban, Iulian Valentin and Zamfir, Cătălin Ioan and Luchian, Camelia Elena and Colibaba, Lucia Cintia and Niculaua, Marius and Cotea, Valeriu V.},
+   title = {Effect of Different Winemaking Conditions on Organic Acids Compounds of White Wines},
+   journal = {Foods},
+   volume = {10},
+   number = {11},
+   pages = {2569},
+   ISSN = {2304-8158},
+   url = {https://www.mdpi.com/2304-8158/10/11/2569},
+   year = {2021},
+   type = {Journal Article}
+}
+
