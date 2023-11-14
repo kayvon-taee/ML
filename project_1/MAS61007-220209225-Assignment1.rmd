@@ -25,24 +25,28 @@ The dataset utilized in this study is drawn from laboratory tests, offering a de
 The data underwent outlier checking, with a total size of 6497 entries. To balance outlier removal without sacrificing too much data, a 5% threshold (325 entries) was set as the maximum limit for removal. An Interquartile Range (IQR) check was applied, a common procedure involving data less than Q1 - 1.5IQR or more than Q3 + 1.5IQR. However, due to a significant loss of data, a stricter threshold of 2.5 was chosen instead.
 
 ## PCA - Chemical differences between red and white wines
+
 ![scree plot PCA](Scree_plot.png){width=50%}
+
 Looking at the scree plot, the elbow appears around n = 3 components, so we will use this when proceeding with our PCA model. When considering the key chemical differences between red and white wines, we need to identify which features produce large loadings for our model. These features will help maximise the langrange multiplier, producing the largest variance which is essential in differentiating the chemical differences between red and white wines.
 
-![biplots_combined](biplots_combined.png)
+![biplots_combined](biplots_combined_no_quality_new.png)
 
-From the principal component plots, the key insights from the loadings we can observe are:
-- PC1: Chlorides - Moderate and positive, Volatile acidity - Large and positive, Colour - large and positive, Sulphates - moderate and positive, pH - moderate and positive, total sulfur dioxide - moderate and negative
-- PC2: Density - Large and positive, Alcohol - large and negative, Free sulfur dioxide - moderate and positive, Residual sugar - large and positive
-- PC3: Fixed acidity - large and positive, Citric acid - large and positive, colour - close to zero, pH - large and negative
+### PC1 component analysis
 
-Insights:
+From the left biplot, we observe positive loadings for pH, volatile acidity, sulphates, colour, fixed acidity, density and chlorides. Notably, colour is coded as a binary dummy variable, where 0 is white wine and 1 is red wine. Therefore, **red wines will score higher on PC1 than white wines**. We can use this to extrapolate any relationships between the colour variable and other chemical metrics. All other factors being equal, white wines with high volatile acidity and chlorides can score nearly as high as red wines with low volatile acidity and chlorides. This suggests that there is a positive correlation between a wine colour, volatile acidity and chloride concentration, implying that **red wines tend to have higher volatile acidity and chlorides than white wines**. The increased fixed acidity concentration could be due to how red wines use the seed and skin in addition to the pulp, which tend to contain more tartaric acid whereas white wines only tend to use the pulp, thus increasing the fixed acidity of red wines.^[@RN5]
 
-1. Colour is coded as 1 with red wine. Since colour is large and positive, red wines will score more highly for PC1. Therefore, we can determine that red wines are associated with higher volatile acidity, sulphates, pH and total sulfur dioxide. We can confirm this by looking through the dataset:
-  - Chlorides: Most of red wines (min: 0.012, Q1: 0.069, median: 0.078, Q3: 0.087, max: 0.132 ) g(sodium chloride)/dm$^3$ have higher chloride values than white wine (min: 0.009, Q1: 0.036, median: 0.043, Q3: 0.050, max: 0.132 ) g(sodium chloride)/dm$^3$
-  - Volatile acidity: Most of red wines (min: 0.12, Q1: 0.395, median: 0.52, Q3: 0.62, max: 0.825 ) g(acetic acid)/dm$^3$ have higher volatile acidity values than white wine (min: 0.08, Q1: 0.210, median: 0.26, Q3: 0.32, max: 0.815 ) g(acetic acid)/dm$^3$
-  - Sulphates: Most of red wines (min: 0.37, Q1: 0.55, median: 0.61, Q3: 0.71, max: 1.02 ) g(potassium sulphate)/dm$^3$ have higher sulphate values than white wine (min: 0.22, Q1: 0.41, median: 0.47, Q3: 0.55, max: 1.01 ) g(potassium sulphate)/dm$^3$
-  - pH: Most of the red wines (min: 2.88, Q1: 3.24, median: 3.33, Q3: 3.41, max: 3.78 ) have higher pH values than white wine (but marginally) (min: 2.72, Q1: 3.09, median: 3.18, Q3: 3.28, max: 3.82 )
-  - Total sulfur dioxide: Most the red wines (min: 6.0, Q1: 23.0, median: 38.0, Q3: 63.0, max: 289.0 ) have much lower total sulfur dioxide values than white wines (min: 9.0, Q1: 108.0, median: 134.0, Q3: 167.0, max: 344.0 )
+Paradoxically, wines with a higher pH (implies less acidic solution) and acidic traits tend to score higher in PC1, but this can be explained as these wines tend to have higher sulphates, which are basic and increase the pH of the alcohol. This suggests that **red wines tend to have a higher pH than white wines from the sulphate content**.^[@RN6]
+
+Alcohol and density seem to have little difference between red and white wines, indicating that alcohol adn density are not key chemical differentiators between and white wines.
+
+For the left quadrants of the left plot, we can see negative loadings for residual sugar, total sulfur dioxide, free sulfur dioxide and citric acid. We have previously deduced that positive loadings imply properties more associated with red wine, hence higher values for the aforementioned properties are related to white wines. In particular the data suggests that **white wines tend to have higher total sulfur dioxide than red wines**. This is expected as white wines are more susceptible to oxidation than red wines, so more sulfur dioxide is used to act as an anti-microbal agent^[@RN6,@RN7].
+
+**Conclusion: The data suggests that the main chemical differences are red wines tend to contain more acids but have a higher pH  than white wines to balance out its acidity. In contrast, white wines tend to contain sulfur dioxide than red wines to help prevent microbial growth.**
+
+## PC2 and PC3 analysis
+
+For completeness, we will check the right plot to check our conclusions drawn from the previous section. For PC2 and PC3, for all things being equal, the wine colour does not affect the PC2/PC3 scores, suggesting that differnet wine charactersitis as a whole will influence the score. To score highly for PC2, wines with high alcohol concentrations
 
 2. Wine is produced by fermenting sugar and residual sugar decreases with more fermentation. Furthermore, adding sugar or salt to a liquid makes it denser. As the alcohol value is large and negative, this means wines with less alcohol will have higher PC2 scores. Therefore, this component could be associated with the age of the wine, but further study would be required to verify this.
 

@@ -30,6 +30,21 @@
    type = {Journal Article}
 }
 
+@article{RN7,
+   author = {Nioi, Claudia and Lisanti, Maria Tiziana and Meunier, Fabrice and Massot, Arnaud and Moine, Virginie},
+   title = {Yeast derivatives: a promising alternative for white wine oxidation prevention},
+   journal = {IVES Technical Reviews, vine and wine},
+   year = {2023},
+   type = {Journal Article}
+}
+
+@article{RN6,
+   author = {Pezley, Matthew Eugene},
+   title = {Production of free sulfur dioxide by wine yeasts},
+   year = {2023},
+   type = {Journal Article}
+}
+
 @article{RN3,
    author = {Scutarașu, Elena Cristina and Teliban, Iulian Valentin and Zamfir, Cătălin Ioan and Luchian, Camelia Elena and Colibaba, Lucia Cintia and Niculaua, Marius and Cotea, Valeriu V.},
    title = {Effect of Different Winemaking Conditions on Organic Acids Compounds of White Wines},
@@ -40,6 +55,17 @@
    ISSN = {2304-8158},
    url = {https://www.mdpi.com/2304-8158/10/11/2569},
    year = {2021},
+   type = {Journal Article}
+}
+
+@article{RN5,
+   author = {Sokač Cvetnić, Tea and Gunjević, Veronika and Pušek, Anita and Jurinjak Tusek, Ana and Dujmić, Filip and Brncic, Mladen and Kovačević Ganić, Karin and Jakovljević, Tamara and Uher, Darko and Mitrić, Grozdana and Radojcic Redovnikovic, Ivana},
+   title = {Comparison of Drying Methods and Their Effect on the Stability of Graševina Grape Pomace Biologically Active Compounds},
+   journal = {Foods},
+   volume = {11},
+   pages = {112},
+   DOI = {10.3390/foods11010112},
+   year = {2022},
    type = {Journal Article}
 }
 
