@@ -1,6 +1,7 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
 ]{article}
@@ -63,7 +64,11 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  hidelinks,
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={blue},
   pdfcreator={LaTeX via pandoc}}
 
 \author{}
@@ -80,9 +85,9 @@ production. As wine is a food product, most of its prized features are
 taste and aroma, which are subjective measurements. Previous studies
 have tried to categorise wine by quality through combining human taste
 testers, physicochemical analysis and statistical methods in attempts to
-introduce objectivity\footnote{\textcite{RN1}}. In this project, we are
-most concerned with which \textbf{particular variables} are essential
-for considering wine quality. By knowing which variables should be
+introduce objectivity\textsuperscript{1}. In this project, we are most
+concerned with which \textbf{particular variables} are essential for
+considering wine quality. By knowing which variables should be
 prioritised, this can motivate further study on optimising the wine
 according to essential attributes and enforce more efficient production.
 
@@ -92,11 +97,10 @@ Therefore, this report aims to address the following questions:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Which variables play a significant role in ascertaining the quality of
-  red and white wine?
+  What are the main chemical differences between red and white wines?
 \item
-  Are there any trends between wine attributes and its perceived
-  quality?
+  Which variables are associated with wines of higher quality overall,
+  and for red and white wine individually?
 \item
   Are there any differences between mean acidity values of wine?
 \item
@@ -125,101 +129,88 @@ chosen instead.
 \subsection{PCA - Chemical differences between red and white
 wines}\label{pca---chemical-differences-between-red-and-white-wines}
 
+\begin{figure}
+\centering
 \includegraphics[width=0.5\textwidth,height=\textheight]{Scree_plot.png}
+\caption{Scree plot of explained variance ratio for each principle
+component}
+\end{figure}
+
 Looking at the scree plot, the elbow appears around n = 3 components, so
 we will use this when proceeding with our PCA model. When considering
 the key chemical differences between red and white wines, we need to
 identify which features produce large loadings for our model. These
-features will help maximise the langrange multiplier, producing the
+features will help maximise the lagrange multiplier, producing the
 largest variance which is essential in differentiating the chemical
 differences between red and white wines.
 
 \begin{figure}
 \centering
-\includegraphics{biplots_combined.png}
-\caption{biplots\_combined}
+\includegraphics{biplots_combined_no_quality_new.png}
+\caption{Bi-plots of loadings and scores for PC1 to PC3 of dataset but
+no quality column}
 \end{figure}
 
-From the principal component plots, the key insights from the loadings
-we can observe are: - PC1: Chlorides - Moderate and positive, Volatile
-acidity - Large and positive, Colour - large and positive, Sulphates -
-moderate and positive, pH - moderate and positive, total sulfur dioxide
-- moderate and negative - PC2: Density - Large and positive, Alcohol -
-large and negative, Free sulfur dioxide - moderate and positive,
-Residual sugar - large and positive - PC3: Fixed acidity - large and
-positive, Citric acid - large and positive, colour - close to zero, pH -
-large and negative
+\subsubsection{PC1 component analysis}\label{pc1-component-analysis}
 
-Insights:
+From the left biplot, we observe positive loadings for pH, volatile
+acidity, sulfites (free sulfur dioxide, total sulfur dioxide), colour,
+fixed acidity, density and chlorides. Notably, colour is coded as a
+binary dummy variable, where 0 is white wine and 1 is red wine.
+Therefore, \textbf{red wines will score higher on PC1 than white wines}.
+We can use this to extrapolate any relationships between the colour
+variable and other chemical metrics. All other factors being equal,
+white wines with high volatile acidity and chlorides can score nearly as
+high as red wines with low volatile acidity and chlorides. This suggests
+that there is a positive correlation between a wine colour, volatile
+acidity and chloride concentration, implying that \textbf{red wines tend
+to have higher volatile acidity and chlorides than white wines}. The
+increased fixed acidity concentration could be due to how red wines use
+the seed and skin in addition to the pulp, which tend to contain more
+tartaric acid whereas white wines only tend to use the pulp, thus
+increasing the fixed acidity of red wines.\textsuperscript{2}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Colour is coded as 1 with red wine. Since colour is large and
-  positive, red wines will score more highly for PC1. Therefore, we can
-  determine that red wines are associated with higher volatile acidity,
-  sulphates, pH and total sulfur dioxide. We can confirm this by looking
-  through the dataset:
-\end{enumerate}
+Paradoxically, wines with a higher pH (implies less acidic solution) and
+acidic traits tend to score higher in PC1, but this can be explained as
+these wines tend to have higher sulphates, which are basic and increase
+the pH of the alcohol. This suggests that \textbf{red wines tend to have
+a higher pH than white wines from the sulphate
+content}.\textsuperscript{3}
 
-\begin{itemize}
-\tightlist
-\item
-  Chlorides: Most of red wines (min: 0.012, Q1: 0.069, median: 0.078,
-  Q3: 0.087, max: 0.132 ) g(sodium chloride)/dm\(^3\) have higher
-  chloride values than white wine (min: 0.009, Q1: 0.036, median: 0.043,
-  Q3: 0.050, max: 0.132 ) g(sodium chloride)/dm\(^3\)
-\item
-  Volatile acidity: Most of red wines (min: 0.12, Q1: 0.395, median:
-  0.52, Q3: 0.62, max: 0.825 ) g(acetic acid)/dm\(^3\) have higher
-  volatile acidity values than white wine (min: 0.08, Q1: 0.210, median:
-  0.26, Q3: 0.32, max: 0.815 ) g(acetic acid)/dm\(^3\)
-\item
-  Sulphates: Most of red wines (min: 0.37, Q1: 0.55, median: 0.61, Q3:
-  0.71, max: 1.02 ) g(potassium sulphate)/dm\(^3\) have higher sulphate
-  values than white wine (min: 0.22, Q1: 0.41, median: 0.47, Q3: 0.55,
-  max: 1.01 ) g(potassium sulphate)/dm\(^3\)
-\item
-  pH: Most of the red wines (min: 2.88, Q1: 3.24, median: 3.33, Q3:
-  3.41, max: 3.78 ) have higher pH values than white wine (but
-  marginally) (min: 2.72, Q1: 3.09, median: 3.18, Q3: 3.28, max: 3.82 )
-\item
-  Total sulfur dioxide: Most the red wines (min: 6.0, Q1: 23.0, median:
-  38.0, Q3: 63.0, max: 289.0 ) have much lower total sulfur dioxide
-  values than white wines (min: 9.0, Q1: 108.0, median: 134.0, Q3:
-  167.0, max: 344.0 )
-\end{itemize}
+Alcohol and density seem to have little difference between red and white
+wines, indicating that alcohol and density are not key chemical
+differentiators between and white wines.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\item
-  Wine is produced by fermenting sugar and residual sugar decreases with
-  more fermentation. Furthermore, adding sugar or salt to a liquid makes
-  it denser. As the alcohol value is large and negative, this means
-  wines with less alcohol will have higher PC2 scores. Therefore, this
-  component could be associated with the age of the wine, but further
-  study would be required to verify this.
-\item
-  Colour does not affect the PC3 score as it is close to zero.
-  Furthermore, the group does not appear to be associated with a
-  particular red/white wine group. Wines with higher citric acid have
-  higher PC3 scores (tends to be white wine, (min: 0.0, Q1: 0.27,
-  median: 0.315, Q3: 0.38, max: 0.74) g/dm\(^3\) compared to red wine
-  (min: 0.0, Q1: 0.09, median: 0.24, Q3: 0.38, max: 0.73) g/dm\(^3\) ).
-  In contrast, wines with high fixed acidity (tends to be red wine) and
-  low pH also score highly (Mostly white wine). However, this group
-  could be associated with grape harvest time, as studies have suggested
-  a relationship between early/late harvest of grapes and grape acidity
-  from citric acid and tartaric acid. More research would be needed to
-  confirm this.\footnote{\textcite{RN4}}
-\end{enumerate}
+For the left quadrants of the left plot, we can see negative loadings
+for residual sugar, sulfites and citric acid. We have previously deduced
+that positive loadings imply properties more associated with red wine,
+hence higher values for the aforementioned properties are related to
+white wines. In particular the data suggests that \textbf{white wines
+tend to have higher levels of sulfites than red wines}. This is expected
+as white wines are more susceptible to oxidation than red wines, so more
+sulfur dioxide is used to act as an anti-microbal
+agent\textsuperscript{3,4}.
 
-\textbf{Conclusion}: The main chemical differences between red and
-whites are that red wines will have higher chloride, volatile acidity,
-sulphates, pH than white wines, but lower total sulfur dioxide and
-citric acid concentrations.
+\textbf{Conclusion: The data suggests that the main chemical differences
+are red wines tend to contain more acids but have a higher pH than white
+wines to balance out its acidity. In contrast, white wines tend to
+contain sulfur dioxide than red wines to help prevent microbial growth.}
+
+\subsection{PC2 and PC3 analysis}\label{pc2-and-pc3-analysis}
+
+For completeness, we will check the right plot to check our conclusions
+drawn from the previous section. For PC2 and PC3, for all things being
+equal, the wine colour does not affect the PC2/PC3 scores, suggesting
+that different wine characteristics as a whole will influence the score.
+To score highly for PC2, wines need to have high alcohol concentrations
+with low density, sulfites, chlorides and residual sugar. As sugar is
+used by yeast to produce alcohol, this could account for wines that use
+sweeter grape varieties, wines that score the highest include low
+residual sugar but higher amounts fo alcohol. To score higher on PC3,
+wines need to have low pH with high fixed acidity and citric acid. This
+category could be a measure of extra components added to the wine to
+enhance flavour and aroma, as citric acid is commonly added to introduce
+freshness.\textsuperscript{5}
 
 \subsection{PCA - Attributes present in wines of high
 quality}\label{pca---attributes-present-in-wines-of-high-quality}
@@ -234,7 +225,8 @@ fit, only the colour and quality instead.
 \begin{figure}
 \centering
 \includegraphics{wine_quality_pc2_vs_pc1_with_quality_new.png}
-\caption{biplots\_with\_quality}
+\caption{Bi-plots of loadings and scores for PC1 to PC3 of dataset with
+quality column}
 \end{figure}
 
 \subsubsection{Analysis - alcohol}\label{analysis---alcohol}
@@ -296,8 +288,8 @@ standard two sample student t-test, but we can instead perform a \emph{A
 hotelling \(T^2\) test}. For a 2 group case (red and white wine), we can
 perform a MANOVA fit and obtain the Hotelling \(T^2\) statistic and the
 F-value. Confidence intervals were calculated using a function I wrote
-myself based on statistical theory. The hotelling T statistic is 1.6352
-and the F-value is 3292.1193. See code for details.
+myself based on statistical theory. The hotelling T statistic is 1.66
+and the F-value is 3292.11. See code for details.
 
 \textbf{H0}: The mean volatile acidity, fixed acidity and pH are equal
 for both red and white wines
@@ -306,16 +298,16 @@ There is very strong evidence (p\textless0.001) to reject the null
 hypothesis that the mean volatile acidity, fixed acidity and pH are
 equal for both red and white wines. It seems at least one of the acidity
 means for red wine is different to white wine with averages of volatile
-acidity 0.234088 95\% simultaneous CI (-28.35, 27.85) g(acetic
-acid)/dm\(^3\), fixed acidity 1.095072 95\% simultaneous CI (-256.65,
-253.73) g(tartaric acid)/dm\(^3\), pH 0.142331 95\% simultaneous CI
-(-34.34, 34.09). As a follow up analysis, we can produce boxplots to see
-which particular acid metric is the most different.
+acidity 0.23 95\% simultaneous CI (-28.35, 27.85) g(acetic
+acid)/dm\(^3\), fixed acidity 1.10 95\% simultaneous CI (-256.65,
+253.73) g(tartaric acid)/dm\(^3\), pH 0.14 95\% simultaneous CI (-34.34,
+34.09). As a follow-up analysis, we can produce boxplots to see which
+particular acid metric is the most different.
 
 \begin{figure}
 \centering
 \includegraphics{box_plots_for_hotelling_two_sample.png}
-\caption{boxplot\_2\_sample}
+\caption{Boxplot for post-hoc Hotelling T\textsuperscript{2} analysis}
 \end{figure}
 
 From the boxplots, it seems most of the red wine volatile acidity tends
@@ -353,6 +345,34 @@ most different (Omitted due to space, but code available to generate
 them). From the boxplots, it seems most of the red wine total sulfur
 dioxide tends to have higher mean values than white wine, which could
 explain why the test result was statistically significant.
+
+\subsubsection{References}\label{references}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  CORTEZ, P., CERDEIRA, A. L., ALMEIDA, F., MATOS, T. \& REIS, J. 2009.
+  Modeling wine preferences by data mining from physicochemical
+  properties. Decis. Support Syst., 47, 547-553.
+\item
+  SOKAČ CVETNIĆ, T., GUNJEVIĆ, V., PUŠEK, A., JURINJAK TUSEK, A.,
+  DUJMIĆ, F., BRNCIC, M., KOVAČEVIĆ GANIĆ, K., JAKOVLJEVIĆ, T., UHER,
+  D., MITRIĆ, G. \& RADOJCIC REDOVNIKOVIC, I. 2022. Comparison of Drying
+  Methods and Their Effect on the Stability of Graševina Grape Pomace
+  Biologically Active Compounds. Foods, 11, 112.
+\item
+  PEZLEY, M. E. 2023. Production of free sulfur dioxide by wine yeasts.
+\item
+  NIOI, C., LISANTI, M. T., MEUNIER, F., MASSOT, A. \& MOINE, V. 2023.
+  Yeast derivatives: a promising alternative for white wine oxidation
+  prevention. IVES Technical Reviews, vine and wine.
+\item
+  VICENTE, J., BARAN, Y., NAVASCUÉS, E., SANTOS, A., CALDERÓN, F.,
+  MARQUINA, D., RAUHUT, D. \& BENITO, S. 2022. Biological management of
+  acidity in wine industry: A review. International Journal of Food
+  Microbiology, 375, 109726.
+\end{enumerate}
 
 \printbibliography
 

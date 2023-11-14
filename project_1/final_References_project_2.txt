@@ -1,0 +1,8 @@
+﻿COLI, M., RANGEL, A., SOUZA, E., OLIVEIRA, M. & CHIARADIA, A. 2015. Chloride concentration in red wines: Influence of terroir and grape type. Food Science and Technology (Campinas), 35, 95-99.
+CORTEZ, P., CERDEIRA, A. L., ALMEIDA, F., MATOS, T. & REIS, J. 2009. Modeling wine preferences by data mining from physicochemical properties. Decis. Support Syst., 47, 547-553.
+MUCALO, A., MALETIC, E. & ZDUNIĆ, G. 2020. Extended Harvest Date Alter Flavonoid Composition and Chromatic Characteristics of Plavac Mali (Vitis vinifera L.) Grape Berries. Foods, 9, 1155.
+NIOI, C., LISANTI, M. T., MEUNIER, F., MASSOT, A. & MOINE, V. 2023. Yeast derivatives: a promising alternative for white wine oxidation prevention. IVES Technical Reviews, vine and wine.
+PEZLEY, M. E. 2023. Production of free sulfur dioxide by wine yeasts.
+SCUTARAȘU, E. C., TELIBAN, I. V., ZAMFIR, C. I., LUCHIAN, C. E., COLIBABA, L. C., NICULAUA, M. & COTEA, V. V. 2021. Effect of Different Winemaking Conditions on Organic Acids Compounds of White Wines. Foods, 10, 2569.
+SOKAČ CVETNIĆ, T., GUNJEVIĆ, V., PUŠEK, A., JURINJAK TUSEK, A., DUJMIĆ, F., BRNCIC, M., KOVAČEVIĆ GANIĆ, K., JAKOVLJEVIĆ, T., UHER, D., MITRIĆ, G. & RADOJCIC REDOVNIKOVIC, I. 2022. Comparison of Drying Methods and Their Effect on the Stability of Graševina Grape Pomace Biologically Active Compounds. Foods, 11, 112.
+VICENTE, J., BARAN, Y., NAVASCUÉS, E., SANTOS, A., CALDERÓN, F., MARQUINA, D., RAUHUT, D. & BENITO, S. 2022. Biological management of acidity in wine industry: A review. International Journal of Food Microbiology, 375, 109726.

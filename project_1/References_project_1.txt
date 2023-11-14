@@ -69,3 +69,15 @@
    type = {Journal Article}
 }
 
+@article{RN8,
+   author = {Vicente, Javier and Baran, Yasemin and Navascués, Eva and Santos, Antonio and Calderón, Fernando and Marquina, Domingo and Rauhut, Doris and Benito, Santiago},
+   title = {Biological management of acidity in wine industry: A review},
+   journal = {International Journal of Food Microbiology},
+   volume = {375},
+   pages = {109726},
+   ISSN = {0168-1605},
+   DOI = {https://doi.org/10.1016/j.ijfoodmicro.2022.109726},
+   url = {https://www.sciencedirect.com/science/article/pii/S0168160522001982},
+   year = {2022},
+   type = {Journal Article}
+}
